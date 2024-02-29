@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+
+.weatherContainer {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.weatherImage {
+  width: 100px;
+}
+
+.weatherItem {
+  margin: 20px 0;
+}

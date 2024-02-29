@@ -1,0 +1,28 @@
+.weatherContainer {
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    max-width: 600px;
+    margin: 20px auto;
+    border-radius: 10px;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .weatherImage {
+    width: 80px;
+    margin-top: 20px;
+  }
+  
+  .weatherItem {
+    margin: 20px 20px;
+    background: rgba(0,0,0,0.2);
+    padding: 10px;
+    border-radius: 5px;
+  }
+  .main{
+    margin: 40px 20px;
+  }
+  
