@@ -1,25 +1,33 @@
 // Search.js
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import '../components/Search.css'
 
-function Search({ onSearch }) {
-  const [city, setCity] = useState('');
+function SearchComponent({ onSearch }) {
+  const [inputValue, setInputValue] = useState("");
+  let navigate = useNavigate(); // Hook for navigation
 
-  const handleSubmit = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
-    onSearch(city);
+    await onSearch(inputValue.trim());
+    navigate("/weather"); // Use navigate for navigation
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-        placeholder="Enter city name"
-      />
-      <button type="submit">Search</button>
-    </form>
+    <div className="container mx-auto">
+      <form className="form"  onSubmit={handleSearch}>
+        <input
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          placeholder="Enter city name"
+        />
+        <button className="btn btn-primary" type="submit">
+          Search
+        </button>
+      </form>
+    </div>
   );
 }
 
-export default Search;
+export default SearchComponent;

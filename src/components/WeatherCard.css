@@ -1,28 +1,90 @@
+/* WeatherCard.css */
+
 .weatherContainer {
-    padding: 20px;
-    font-family: 'Arial', sans-serif;
-    max-width: 600px;
-    margin: 20px auto;
-    border-radius: 10px;
-    color: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    text-align: center;
-    background-size: cover;
-    background-position: center;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  background-size: cover; /* Ensure the background covers the container */
+  background-position: center; /* Center the background image */
+}
+
+.weatherContainer:hover {
+  transform: translateY(-5px);
+}
+
+.weatherItem {
+  margin: 10px 0;
+  padding: 10px;
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.weatherItem:hover {
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
+}
+
+h2.weatherItem {
+  color: #333;
+  text-align: center;
+}
+
+img.weatherItem {
+  display: block;
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+}
+
+/* Button styles for 'No data found' */
+.btn.btn-danger {
+  display: block;
+  width: max-content;
+  margin: 20px auto;
+  padding: 10px 20px;
+  color: white;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn.btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.weatherContainer {
+  animation: fadeIn 1s ease-out;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 767px) {
+  .weatherContainer {
+    margin: 10px;
+    padding: 15px;
   }
-  
-  .weatherImage {
-    width: 80px;
-    margin-top: 20px;
-  }
-  
+
   .weatherItem {
-    margin: 20px 20px;
-    background: rgba(0,0,0,0.2);
-    padding: 10px;
-    border-radius: 5px;
+    padding: 8px;
   }
-  .main{
-    margin: 40px 20px;
+
+  h2.weatherItem, p.weatherItem {
+    font-size: 14px;
   }
-  
+
+  img.weatherItem {
+    width: 80px;
+    height: 80px;
+  }
+}

@@ -1,0 +1,37 @@
+/* Search.css */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust height as needed */
+    margin: 0 auto;
+  }
+  
+  .form {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Spacing between input and button */
+  }
+  
+  input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #007bff; /* Bootstrap primary color */
+    border-radius: 5px;
+    width: 300px; /* Adjust width as needed */
+  }
+  
+  .btn-primary {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3; /* Darker shade of primary color */
+  }
+  
