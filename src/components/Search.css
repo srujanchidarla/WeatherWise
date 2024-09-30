@@ -3,7 +3,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Adjust height as needed */
+    /* height: 100vh; Adjust height as needed */
+    height: 10vh;
     margin: 0 auto;
   }
   

@@ -1,21 +1,30 @@
 // Search.js
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import '../components/Search.css'
+import '../components/Search.css';
 
 function SearchComponent({ onSearch }) {
   const [inputValue, setInputValue] = useState("");
-  let navigate = useNavigate(); // Hook for navigation
+  let navigate = useNavigate(); 
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    await onSearch(inputValue.trim());
-    navigate("/weather"); // Use navigate for navigation
+    if (inputValue.trim() === "") {
+      alert("Please enter a city name");  // Display alert if input is empty
+      return;
+    }
+    
+    try {
+      await onSearch(inputValue.trim());
+      navigate("/weather");
+    } catch (error) {
+      console.error("Error during search:", error.message);
+    }
   };
 
   return (
     <div className="container mx-auto">
-      <form className="form"  onSubmit={handleSearch}>
+      <form className="form" onSubmit={handleSearch}>
         <input
           type="text"
           value={inputValue}

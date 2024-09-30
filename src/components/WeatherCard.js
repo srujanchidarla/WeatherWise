@@ -1,29 +1,39 @@
+// WeatherCard.js
 import "./WeatherCard.css";
-import clearSky from '../assets/sky.gif';
-import clouds from '../assets/clouds.gif';
-import rain from '../assets/rain.gif';
+import clearSky from "../assets/sky.gif";
+import clouds from "../assets/clouds.gif";
+import rain from "../assets/rain.gif";
 
-function WeatherComponent({ weather }) {
-
+function WeatherComponent({ weather, city, country }) {
   function getBackgroundImage(weather) {
-    switch(weather.weather[0].main.toLowerCase()) {
-      case 'clear':
+    if (!weather || !weather.weather || !weather.weather[0]) return null; // Check for undefined properties
+    switch (weather.weather[0].main.toLowerCase()) {
+      case "clear":
         return `url(${clearSky})`;
-      case 'clouds':
+      case "clouds":
         return `url(${clouds})`;
-      case 'rain':
+      case "rain":
         return `url(${rain})`;
       default:
-        return "linear-gradient(145deg, #e6e6e6, #ffffff)"; // Fallback for other conditions
+        return "linear-gradient(145deg, #e6e6e6, #ffffff)";
     }
   }
-  
-  if (!weather) return <div className="btn btn-danger">No data found</div>;
+
+  if (!weather || !weather.main) {
+    return <div className="btn btn-danger">No data found</div>;
+  }
 
   return (
-    <div className="weatherContainer" style={{ backgroundImage: getBackgroundImage(weather), backgroundSize: 'cover' }}>
+    <div
+      className="weatherContainer"
+      style={{
+        backgroundImage: getBackgroundImage(weather),
+        backgroundSize: "cover",
+      }}
+    >
       <h2 className="weatherItem">
-        Weather in {weather.name}, {weather.sys.country}
+        Weather in {city ? city : "Unknown City"},{" "}
+        {country ? country : "Unknown Country"} {/* Display city and country */}
       </h2>
       <img
         className="weatherItem"
