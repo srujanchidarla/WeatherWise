@@ -1,34 +1,38 @@
 /* FiveDayForecast.css */
 .five-day-forecast {
-    margin: 20px auto;
-    text-align: center;
-  }
-  
-  .forecast-grid {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-  }
-  
-  .forecast-day {
-    background-color: #f9f9f9;
-    padding: 15px;
-    margin: 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-  }
-  
-  .forecast-day:hover {
-    transform: translateY(-5px);
-  }
-  
-  .forecast-day img {
-    width: 50px;
-    height: 50px;
-  }
-  
-  .forecast-day p {
-    margin: 5px 0;
-  }
-  
+  margin: 20px auto;
+  text-align: center;
+}
+
+.forecast-grid {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.forecast-day {
+  background-color: #f9f9f9;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.forecast-day:hover {
+  transform: translateY(-5px);
+}
+
+.forecast-day img {
+  width: 50px;
+  height: 50px;
+  background-color: #f9f9f9;
+}
+
+.forecast-day p {
+  margin: 5px 0;
+  background-color: #f9f9f9;
+}
+h4 {
+  background-color: #f9f9f9;
+}

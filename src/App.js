@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import WeatherComponent from "./components/WeatherCard";
 import SearchComponent from "./components/Search";
 import FiveDayForecast from "./components/FiveDayForecast";
+import MapComponent from "./components/MapComponent";
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
@@ -116,6 +117,7 @@ function App() {
                   country={currentCountry}
                 />
                 <FiveDayForecast forecastList={weatherData.list} />
+                <MapComponent></MapComponent>
               </>
             )}
           </>
