@@ -1,22 +1,20 @@
-// Search.js
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import '../components/Search.css';
+import { useNavigate } from "react-router-dom";
+import "../components/Search.css";
 
 function SearchComponent({ onSearch }) {
   const [inputValue, setInputValue] = useState("");
-  let navigate = useNavigate(); 
+  let navigate = useNavigate();
 
   const handleSearch = async (e) => {
     e.preventDefault();
     if (inputValue.trim() === "") {
-      alert("Please enter a city name");  // Display alert if input is empty
+      alert("Please enter a city name"); // Display alert if input is empty
       return;
     }
-    
     try {
       await onSearch(inputValue.trim());
-      navigate("/weather");
+      navigate("/");
     } catch (error) {
       console.error("Error during search:", error.message);
     }

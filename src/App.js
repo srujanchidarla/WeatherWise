@@ -1,37 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import WeatherComponent from "./components/WeatherCard";
 import SearchComponent from "./components/Search";
 import FiveDayForecast from "./components/FiveDayForecast";
+import HourForecast from "./components/HourForecast"; // Import the new component
 import MapComponent from "./components/MapComponent";
+import Contact from "./components/Contact";
+import axios from "axios";
+import Footer from "./components/Footer";
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [isCurrentLocation, setIsCurrentLocation] = useState(false); // For current location check
-  const [error, setError] = useState(null); // Error state
-  const [currentCity, setCurrentCity] = useState(""); // For storing current city name
-  const [currentCountry, setCurrentCountry] = useState(""); // For storing current country name
+  const [isCurrentLocation, setIsCurrentLocation] = useState(false);
+  const [error, setError] = useState(null);
+  const [currentCity, setCurrentCity] = useState("");
+  const [currentCountry, setCurrentCountry] = useState("");
+  const [population, setPopulation] = useState(null);
+  const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
-  const apiKey = "4194a7eff12a6cfbc59c0fa96e300cfd"; // Replace with your valid API key
-
-  // Fetch weather data using latitude and longitude
   const fetchWeatherByCoords = async (lat, lon, isCurrent = false) => {
     setLoading(true);
-    setError(null); // Reset previous errors
+    setError(null);
     try {
       const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-      const response = await fetch(weatherUrl);
-      const data = await response.json();
-
-      if (data.cod && data.cod !== "200") {
-        throw new Error(data.message);
+      const response = await axios.get(weatherUrl);
+      if (response.status === 200) {
+        const data = response.data;
+        console.log("Weather data:", data);
+        setWeatherData(data);
+        setIsCurrentLocation(isCurrent);
+        setCurrentCity(data.city.name);
+        setCurrentCountry(data.city.country);
+        setPopulation(data.city.population);
       }
-
-      setWeatherData(data);
-      setIsCurrentLocation(isCurrent); // Mark the weather data as for current location
-      setCurrentCity(data.city.name); // Store the current city
-      setCurrentCountry(data.city.country); // Store the current country
     } catch (error) {
       console.error("Error fetching weather data:", error.message);
       setError("Unable to retrieve weather data.");
@@ -41,7 +44,6 @@ function App() {
     }
   };
 
-  // UseEffect for getting the current location of the device
   useEffect(() => {
     const getCurrentLocation = () => {
       if (navigator.geolocation) {
@@ -51,7 +53,7 @@ function App() {
               position.coords.latitude,
               position.coords.longitude,
               true
-            ); // Fetch weather using current location
+            );
           },
           (error) => {
             console.error("Geolocation error:", error);
@@ -59,27 +61,21 @@ function App() {
           }
         );
       } else {
-        console.error("Geolocation is not supported by this browser.");
         setError("Geolocation is not supported by this browser.");
       }
     };
-
-    // Call getCurrentLocation when the component mounts
     getCurrentLocation();
   }, []);
 
-  // Fetch weather based on the city name (via geocode API)
   const fetchWeather = async (cityName) => {
     setLoading(true);
-    setError(null); // Reset previous errors
-    const geocodeUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`;
-
+    setError(null);
+    const geocodeUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`;
     try {
-      const geoResponse = await fetch(geocodeUrl);
-      const geoData = await geoResponse.json();
-
+      const geoResponse = await axios.get(geocodeUrl);
+      const geoData = geoResponse.data;
       if (geoData && geoData.length > 0) {
-        const { lat, lon } = geoData[0]; // Get latitude and longitude
+        const { lat, lon } = geoData[0];
         await fetchWeatherByCoords(lat, lon);
       } else {
         setError("City not found. Please try another search.");
@@ -93,37 +89,102 @@ function App() {
     }
   };
 
+  const hourlyForecastData = weatherData
+    ? weatherData.list.map((item) => ({
+        time: item.dt * 1000, // Storing as timestamp
+        temperature: item.main.temp,
+        condition: item.weather[0].description.toLowerCase(), // Ensure lowercase for consistent matching
+      }))
+    : [];
+
   return (
-    <Router>
-      <div>
-        <SearchComponent onSearch={fetchWeather} />
-        {loading ? (
-          <div>Loading...</div>
-        ) : error ? (
-          <div style={{ color: "red", marginTop: "20px" }}>{error}</div>
-        ) : (
-          <>
-            {isCurrentLocation && (
-              <h4 className="btn btn-danger">
-                This is your current location weather report: {currentCity},{" "}
-                {currentCountry}
-              </h4>
-            )}
-            {weatherData && weatherData.list && (
-              <>
-                <WeatherComponent
-                  weather={weatherData.list[0]}
-                  city={currentCity}
-                  country={currentCountry}
-                />
-                <FiveDayForecast forecastList={weatherData.list} />
-                <MapComponent></MapComponent>
-              </>
-            )}
-          </>
-        )}
-      </div>
-    </Router>
+    <>
+      <Router>
+        <div className="main">
+          <Navbar />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <SearchComponent onSearch={fetchWeather} />
+                  {loading ? (
+                    <div>Loading...</div>
+                  ) : error ? (
+                    <div style={{ color: "red", marginTop: "20px" }}>
+                      {error}
+                    </div>
+                  ) : (
+                    <>
+                      <div className="d-flex justify-content-center align-items-center my-4">
+                        {isCurrentLocation && (
+                          <button className="btn btn-success px-4">
+                            This is your current location weather report:{" "}
+                            {currentCity}, {currentCountry}
+                          </button>
+                        )}
+                      </div>
+                      {weatherData && weatherData.list && (
+                        <>
+                          <WeatherComponent
+                            weather={weatherData.list[0]}
+                            city={currentCity}
+                            country={currentCountry}
+                            sunrise={weatherData.city.sunrise}
+                            sunset={weatherData.city.sunset}
+                            timezone={weatherData.city.timezone}
+                            population={population}
+                          />
+                          <HourForecast
+                            forecastData={hourlyForecastData}
+                            cityName={currentCity}
+                          />
+                          <FiveDayForecast
+                            forecastList={weatherData.list}
+                            cityName={currentCity}
+                          />
+                          <MapComponent />
+                        </>
+                      )}
+                    </>
+                  )}
+                </>
+              }
+            />
+            <Route
+              path="/forecast"
+              element={
+                <>
+                  <h1 className="m-3 heading">Forecast for {currentCity}</h1>
+                  <HourForecast forecastData={hourlyForecastData} />
+                  <FiveDayForecast
+                    forecastList={weatherData?.list || []}
+                    cityName={currentCity}
+                  />
+                </>
+              }
+            />
+            <Route
+              path="/map"
+              element={
+                <>
+                  <MapComponent />
+                </>
+              }
+            />
+            <Route
+              path="/contact"
+              element={
+                <>
+                  <Contact />
+                </>
+              }
+            />
+          </Routes>
+        </div>
+      </Router>
+      <Footer />
+    </>
   );
 }
 

@@ -1,0 +1,98 @@
+.hour-forecast {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  width: 100%; /* Fit to screen width */
+  max-width: 1200px;
+  overflow: hidden; /* Hide overflow */
+}
+
+.forecast-heading {
+  text-align: center;
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.forecast-grid {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap; /* Align items in a single row */
+  gap: 10px;
+  overflow-x: auto; /* Add horizontal scrolling */
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+
+.forecast-grid::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in Chrome, Safari, and Opera */
+}
+
+.forecast-item {
+  background: #007bff;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 150px;
+  flex: 1; /* Allow flex items to grow and fill available space */
+  transition: transform 0.3s;
+}
+
+.forecast-item:hover {
+  transform: scale(1.05);
+}
+
+.icon {
+  font-size: 40px;
+  margin: 10px 0;
+}
+
+.day,
+.time,
+.temp,
+.condition {
+  margin: 5px 0;
+  font-size: 1em;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .forecast-item {
+    min-width: 120px;
+  }
+
+  .forecast-heading {
+    font-size: 1.5em;
+  }
+
+  .day,
+  .time,
+  .temp,
+  .condition {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .forecast-item {
+    min-width: 100px;
+    padding: 10px;
+  }
+
+  .forecast-heading {
+    font-size: 1.2em;
+  }
+
+  .day,
+  .time,
+  .temp,
+  .condition {
+    font-size: 0.8em;
+  }
+
+  .icon {
+    font-size: 30px;
+  }
+}

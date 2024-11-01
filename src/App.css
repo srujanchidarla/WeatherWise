@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app-body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.loading {
+  font-size: 20px;
+  font-weight: bold;
+  color: #555;
+  text-align: center;
+}
+
+.error-message {
+  font-size: 18px;
+  color: red;
+  text-align: center;
+}
+
+.location-header {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 10px;
+}

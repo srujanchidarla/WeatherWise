@@ -1,23 +1,94 @@
 /* MapComponent.css */
-#map {
+
+.map-container {
+  position: relative;
   height: 500px;
-  width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 20px auto;
+  margin: 20px 20px 60px 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-  #map {
-    height: 400px;
-    width: 90%;
+.map {
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.map-page-header {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.map-page-header h1 {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+/* Custom Icon Styling */
+.custom-icon {
+  display: flex;
+  font-size: 3.5rem; /* Increased font size */
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  width: 3.5rem; /* Increased width */
+  height: 3.5rem; /* Increased height */
+  border-radius: 50%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.custom-icon svg {
+  font-size: 3.5rem; /* Increased font size */
+}
+
+.custom-icon--sunny {
+  background-color: #ffdd57;
+}
+
+.custom-icon--cloudy {
+  background-color: #888;
+}
+
+.custom-icon--rainy {
+  background-color: #4da3ff;
+}
+
+.custom-icon--snowy {
+  background-color: #b3e0ff;
+}
+
+.custom-icon--thunderstorm {
+  background-color: #a3a3ff;
+}
+
+/* Media Queries for Responsiveness */
+@media (min-width: 768px) {
+  .temperature-info {
+    flex-direction: row;
+    align-items: stretch;
   }
 }
 
-@media (max-width: 480px) {
-  #map {
+@media (max-width: 600px) {
+  .map-container {
     height: 300px;
-    width: 100%;
+    margin: 15px 15px 40px 15px;
+  }
+  .temperature-info {
+    margin-bottom: 40px;
+  }
+  .temperature-info .temp-boxes {
+    flex-direction: column;
+  }
+  .lowest-temp,
+  .highest-temp {
+    margin: 10px 0;
+  }
+  .custom-icon svg {
+    font-size: 1.8em; /* Adjusted font size for smaller screens */
+  }
+  .map-page-header h1 {
+    font-size: 1.8rem;
   }
 }

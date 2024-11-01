@@ -1,64 +1,78 @@
 /* WeatherCard.css */
 
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
 .weatherContainer {
-  max-width: 600px;
-  margin: 20px auto;
+  background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  background: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  background-size: cover; /* Ensure the background covers the container */
-  background-position: center; /* Center the background image */
-}
-
-.weatherContainer:hover {
-  transform: translateY(-5px);
-}
-
-.weatherItem {
-  margin: 10px 0;
-  padding: 10px;
-  background: linear-gradient(145deg, #e6e6e6, #ffffff);
-  border-radius: 5px;
-  transition: background 0.3s ease;
-}
-
-.weatherItem:hover {
-  background: linear-gradient(145deg, #ffffff, #e6e6e6);
-}
-
-h2.weatherItem {
-  color: #333;
+  margin-bottom: 20px;
+  color: #000000;
+  animation: fadeIn 1s ease-in-out;
   text-align: center;
+  font-family: "Roboto", sans-serif;
 }
 
-img.weatherItem {
-  display: block;
-  margin: 0 auto;
-  width: 100px;
-  height: 100px;
+.mainInfo h2 {
+  color: #000000;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  font-weight: 700;
 }
 
-/* Button styles for 'No data found' */
-.btn.btn-danger {
-  display: block;
-  width: max-content;
-  margin: 20px auto;
-  padding: 10px 20px;
-  color: white;
-  background-color: #dc3545;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.temperatureSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
 }
 
-.btn.btn-danger:hover {
-  background-color: #c82333;
+.temperatureValue {
+  font-size: 3rem;
+  margin-left: 10px;
+  font-weight: 700;
 }
 
-/* Animations */
+.weatherIcon {
+  margin-top: 20px;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.sunInfo {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  font-size: 1.5rem;
+}
+
+.weatherDetailsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.detailItem {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  backdrop-filter: blur(5px);
+  color: #000000;
+  font-weight: 400;
+}
+
+.detailItem svg {
+  margin-bottom: 5px;
+  color: #000000;
+}
+
+.pressure {
+  grid-column: span 2;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -68,28 +82,22 @@ img.weatherItem {
   }
 }
 
-.weatherContainer {
-  animation: fadeIn 1s ease-out;
-}
-
-/* Media queries for responsive design */
-@media (max-width: 767px) {
+/* Responsive Styles */
+@media (max-width: 768px) {
   .weatherContainer {
-    margin: 10px;
     padding: 15px;
   }
 
-  .weatherItem {
-    padding: 8px;
+  .temperatureValue {
+    font-size: 2.5rem;
   }
 
-  h2.weatherItem,
-  p.weatherItem {
-    font-size: 14px;
+  .sunInfo {
+    flex-direction: column;
+    font-size: 1.2rem;
   }
 
-  img.weatherItem {
-    width: 80px;
-    height: 80px;
+  .weatherDetailsGrid {
+    grid-template-columns: 1fr;
   }
 }
