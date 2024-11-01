@@ -42,6 +42,13 @@ WeatherWise is a comprehensive weather application providing detailed weather in
 ### Installation
 
 1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/username/repository-name.git
+
+   ```
+
+2. Clone the repository:
    ```bash
    git clone https://github.com/username/repository-name.git
    ```

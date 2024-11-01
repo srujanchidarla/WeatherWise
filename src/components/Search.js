@@ -9,11 +9,12 @@ function SearchComponent({ onSearch }) {
   const handleSearch = async (e) => {
     e.preventDefault();
     if (inputValue.trim() === "") {
-      alert("Please enter a city name"); // Display alert if input is empty
+      alert("Please enter a city name");
       return;
     }
     try {
       await onSearch(inputValue.trim());
+      setInputValue(""); // Clear the input field after search
       navigate("/");
     } catch (error) {
       console.error("Error during search:", error.message);
@@ -21,7 +22,7 @@ function SearchComponent({ onSearch }) {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container mb-0 mt-0 ml-3 pt-4 pb-0">
       <form className="form" onSubmit={handleSearch}>
         <input
           type="text"

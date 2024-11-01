@@ -111,9 +111,7 @@ function App() {
                   {loading ? (
                     <div>Loading...</div>
                   ) : error ? (
-                    <div style={{ color: "red", marginTop: "20px" }}>
-                      {error}
-                    </div>
+                    <div style={{ color: "red" }}>{error}</div>
                   ) : (
                     <>
                       <div className="d-flex justify-content-center align-items-center my-4">
