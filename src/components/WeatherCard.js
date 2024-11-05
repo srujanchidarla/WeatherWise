@@ -6,7 +6,6 @@ import {
   WiSunrise,
   WiSunset,
   WiCloud,
-  WiRaindrop,
   WiDaySunny,
   WiDayRain,
   WiSnow,

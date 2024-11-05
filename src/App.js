@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import WeatherComponent from "./components/WeatherCard";
 import SearchComponent from "./components/Search";
 import FiveDayForecast from "./components/FiveDayForecast";
-import HourForecast from "./components/HourForecast"; // Import the new component
+import HourForecast from "./components/HourForecast";
 import MapComponent from "./components/MapComponent";
 import Contact from "./components/Contact";
 import axios from "axios";
