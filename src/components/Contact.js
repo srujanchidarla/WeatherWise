@@ -38,7 +38,8 @@ const Contact = () => {
                 <FaPhoneAlt className="contact-icon" /> +120 188 447 24
               </p>
               <p>
-                <FaEnvelope className="contact-icon" /> srujanvarmamng@gmail.com
+                <FaEnvelope className="contact-icon" />{" "}
+                contact@srujanchidarla.com
               </p>
             </div>
           </div>
