@@ -4,7 +4,6 @@ import {
   FaLinkedin,
   FaInstagram,
   FaEnvelope,
-  FaPhoneAlt,
   FaMapMarkerAlt,
   FaUser,
 } from "react-icons/fa";
@@ -49,9 +48,6 @@ const Footer = () => {
               <li>
                 <FaEnvelope className="footer-icon" />{" "}
                 contact@srujanchidarla.com
-              </li>
-              <li>
-                <FaPhoneAlt className="footer-icon" /> +120 188 447 24
               </li>
               <li>
                 <FaMapMarkerAlt className="footer-icon" /> Maryland, USA
