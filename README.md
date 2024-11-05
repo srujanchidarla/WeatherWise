@@ -2,6 +2,12 @@
 
 WeatherWise is a comprehensive weather application providing detailed weather information, including current weather, hourly forecast, and 5-day forecast. It leverages modern web technologies to offer a user-friendly experience with sleek and responsive design.
 
+![image](https://github.com/user-attachments/assets/7961906a-1dc6-4aa1-a2d7-50a969c7f793)
+
+![image](https://github.com/user-attachments/assets/61a91488-8ab1-48f7-b31f-ca3d973f2999)
+
+
+
 ## Table of Contents
 
 - [Features](#features)
