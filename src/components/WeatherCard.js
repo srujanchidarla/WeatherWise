@@ -28,7 +28,7 @@ function WeatherComponent({
   const convertToLocalTime = (timestamp, timezoneOffset) => {
     if (!timestamp) return "N/A";
     const date = new Date(
-      (timestamp + timezoneOffset) * 1000 + 4 * 60 * 60 * 1000
+      (timestamp + timezoneOffset) * 1000 + 5 * 60 * 60 * 1000
     ); // Adding 2 hours in milliseconds
     return date.toLocaleTimeString([], {
       hour: "2-digit",
