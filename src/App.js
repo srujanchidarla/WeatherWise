@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import WeatherComponent from "./components/WeatherCard";
@@ -20,30 +20,35 @@ function App() {
   const [population, setPopulation] = useState(null);
   const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
-  const fetchWeatherByCoords = async (lat, lon, isCurrent = false) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-      const response = await axios.get(weatherUrl);
-      if (response.status === 200) {
-        const data = response.data;
-        console.log("Weather data:", data);
-        setWeatherData(data);
-        setIsCurrentLocation(isCurrent);
-        setCurrentCity(data.city.name);
-        setCurrentCountry(data.city.country);
-        setPopulation(data.city.population);
+  // Memoized fetchWeatherByCoords function
+  const fetchWeatherByCoords = useCallback(
+    async (lat, lon, isCurrent = false) => {
+      setLoading(true);
+      setError(null);
+      try {
+        const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+        const response = await axios.get(weatherUrl);
+        if (response.status === 200) {
+          const data = response.data;
+          console.log("Weather data:", data);
+          setWeatherData(data);
+          setIsCurrentLocation(isCurrent);
+          setCurrentCity(data.city.name);
+          setCurrentCountry(data.city.country);
+          setPopulation(data.city.population);
+        }
+      } catch (error) {
+        console.error("Error fetching weather data:", error.message);
+        setError("Unable to retrieve weather data.");
+        setWeatherData(null);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error("Error fetching weather data:", error.message);
-      setError("Unable to retrieve weather data.");
-      setWeatherData(null);
-    } finally {
-      setLoading(false);
-    }
-  };
+    },
+    [apiKey]
+  ); // Only re-define when apiKey changes
 
+  // Updated useEffect with memoized fetchWeatherByCoords
   useEffect(() => {
     const getCurrentLocation = () => {
       if (navigator.geolocation) {
@@ -65,7 +70,7 @@ function App() {
       }
     };
     getCurrentLocation();
-  }, []);
+  }, [fetchWeatherByCoords]);
 
   const fetchWeather = async (cityName) => {
     setLoading(true);

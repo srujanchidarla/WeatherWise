@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import axios from "axios";
@@ -16,37 +16,43 @@ const MapComponent = () => {
   const mapRef = useRef(null);
   const markerLayer = useRef(null);
   const weatherCache = useRef({});
-  const cities = [
-    { name: "New York", lat: 40.7128, lon: -74.006 },
-    { name: "London", lat: 51.5074, lon: -0.1278 },
-    { name: "Hyderabad", lat: 17.385, lon: 78.4867 },
-    { name: "Tokyo", lat: 35.6762, lon: 139.6503 },
-    { name: "Sydney", lat: -33.8688, lon: 151.2093 },
-    { name: "Paris", lat: 48.8566, lon: 2.3522 },
-    { name: "Brasilia", lat: -15.8267, lon: -47.9218 },
-    { name: "Bumba", lat: 2.1883, lon: 22.4683 },
-    { name: "Erdenet", lat: 49.0526, lon: 104.0442 },
-    { name: "Murmansk", lat: 68.9585, lon: 33.0827 },
-  ];
+
+  // Memoize cities array
+  const cities = useMemo(
+    () => [
+      { name: "New York", lat: 40.7128, lon: -74.006 },
+      { name: "London", lat: 51.5074, lon: -0.1278 },
+      { name: "Hyderabad", lat: 17.385, lon: 78.4867 },
+      { name: "Tokyo", lat: 35.6762, lon: 139.6503 },
+      { name: "Sydney", lat: -33.8688, lon: 151.2093 },
+      { name: "Paris", lat: 48.8566, lon: 2.3522 },
+      { name: "Brasilia", lat: -15.8267, lon: -47.9218 },
+      { name: "Bumba", lat: 2.1883, lon: 22.4683 },
+      { name: "Erdenet", lat: 49.0526, lon: 104.0442 },
+      { name: "Murmansk", lat: 68.9585, lon: 33.0827 },
+    ],
+    []
+  );
 
   const getWeatherIcon = (condition) => {
     switch (condition.toLowerCase()) {
       case "clear":
-        return <WiDaySunny size={40} color="gold" />; // Increased size
+        return <WiDaySunny size={40} color="gold" />;
       case "clouds":
-        return <WiCloud size={40} color="gray" />; // Increased size
+        return <WiCloud size={40} color="gray" />;
       case "rain":
-        return <WiRain size={40} color="blue" />; // Increased size
+        return <WiRain size={40} color="blue" />;
       case "snow":
-        return <WiSnow size={40} color="lightblue" />; // Increased size
+        return <WiSnow size={40} color="lightblue" />;
       case "thunderstorm":
-        return <WiThunderstorm size={40} color="purple" />; // Increased size
+        return <WiThunderstorm size={40} color="purple" />;
       default:
-        return <WiDaySunny size={40} color="gold" />; // Increased size
+        return <WiDaySunny size={40} color="gold" />;
     }
   };
 
-  const fetchWeather = async (city) => {
+  // Memoized fetchWeather function
+  const fetchWeather = useCallback(async (city) => {
     const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
     if (weatherCache.current[city.name]) {
       return weatherCache.current[city.name];
@@ -60,7 +66,7 @@ const MapComponent = () => {
       console.error("Error fetching weather data:", error.message);
       return null;
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (!mapRef.current) {
@@ -78,6 +84,7 @@ const MapComponent = () => {
         }
       ).addTo(mapRef.current);
       markerLayer.current = L.layerGroup().addTo(mapRef.current);
+
       const fetchAllCitiesWeather = async () => {
         for (const city of cities) {
           const weather = await fetchWeather(city);
@@ -98,6 +105,7 @@ const MapComponent = () => {
           }
         }
       };
+
       fetchAllCitiesWeather();
     }
     return () => {
@@ -106,18 +114,11 @@ const MapComponent = () => {
         mapRef.current = null;
       }
     };
-  }, []);
+  }, [cities, fetchWeather]); // Include memoized dependencies
 
   return (
-    <div className="page-wrapper">
-      <div className="map-page-header">
-        <h1>Global Weather Map</h1>
-      </div>
-      <div className="map-section">
-        <div className="map-container">
-          <div id="map" className="map"></div>
-        </div>
-      </div>
+    <div className="map-container">
+      <div id="map" className="map"></div>
     </div>
   );
 };
