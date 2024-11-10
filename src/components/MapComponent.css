@@ -7,6 +7,7 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 0; /* Lower z-index for the map */
 }
 
 .map {
@@ -14,10 +15,14 @@
   width: 100%;
   border-radius: 12px;
 }
+.heading {
+  text-align: center;
+}
 
 .map-page-header {
   text-align: center;
   margin-top: 20px;
+  z-index: 1; /* Ensure header is above the map */
 }
 
 .map-page-header h1 {
@@ -28,36 +33,34 @@
 /* Custom Icon Styling */
 .custom-icon {
   display: flex;
-  font-size: 3.5rem; /* Increased font size */
+  font-size: 3.5rem;
   justify-content: center;
   align-items: center;
   color: #fff;
-  width: 3.5rem; /* Increased width */
-  height: 3.5rem; /* Increased height */
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 50%;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  z-index: 2; /* Ensure icon is above map but below navbar */
 }
 
 .custom-icon svg {
-  font-size: 3.5rem; /* Increased font size */
+  font-size: 3.5rem;
 }
 
+/* Custom icon colors */
 .custom-icon--sunny {
   background-color: #ffdd57;
 }
-
 .custom-icon--cloudy {
   background-color: #888;
 }
-
 .custom-icon--rainy {
   background-color: #4da3ff;
 }
-
 .custom-icon--snowy {
   background-color: #b3e0ff;
 }
-
 .custom-icon--thunderstorm {
   background-color: #a3a3ff;
 }
@@ -86,9 +89,15 @@
     margin: 10px 0;
   }
   .custom-icon svg {
-    font-size: 1.8em; /* Adjusted font size for smaller screens */
+    font-size: 1.8em;
   }
   .map-page-header h1 {
     font-size: 1.8rem;
   }
+}
+
+/* Navbar adjustments */
+.navbar {
+  z-index: 10; /* Ensure navbar is always on top */
+  position: relative;
 }

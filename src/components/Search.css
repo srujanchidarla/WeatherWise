@@ -1,5 +1,7 @@
 /* Search.css */
 .container {
+  margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,17 +9,20 @@
 }
 
 .form {
+  margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
-  gap: 10px; /* Spacing between input and button */
+  gap: 1rem; /* Spacing between input and button */
 }
 
 input[type="text"] {
+  margin: 0;
   padding: 10px;
   font-size: 16px;
   border: 2px solid #007bff; /* Bootstrap primary color */
   border-radius: 5px;
-  width: 300px; /* Adjust width as needed */
+  /* width: 20rem; */
 }
 
 .btn-primary {

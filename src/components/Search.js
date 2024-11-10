@@ -22,7 +22,7 @@ function SearchComponent({ onSearch }) {
   };
 
   return (
-    <div className="container mb-0 mt-0 ml-3 pt-4 pb-0">
+    <div className="container">
       <form className="form" onSubmit={handleSearch}>
         <input
           type="text"

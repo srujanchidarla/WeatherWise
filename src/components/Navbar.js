@@ -10,6 +10,9 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+  // Close the menu when navigating to a new route
+  const closeMenu = () => setIsOpen(false);
+
   return (
     <nav className="navbar">
       <div className="navbar-logo">
@@ -29,22 +32,22 @@ const Navbar = () => {
       </div>
       <ul className={`navbar-links ${isOpen ? "open" : ""}`}>
         <li>
-          <Link to="/" onClick={toggleMenu}>
+          <Link to="/" onClick={closeMenu}>
             Home
           </Link>
         </li>
         <li>
-          <Link to="/forecast" onClick={toggleMenu}>
+          <Link to="/forecast" onClick={closeMenu}>
             Forecast
           </Link>
         </li>
         <li>
-          <Link to="/map" onClick={toggleMenu}>
+          <Link to="/map" onClick={closeMenu}>
             Map
           </Link>
         </li>
         <li>
-          <Link to="/contact" onClick={toggleMenu}>
+          <Link to="/contact" onClick={closeMenu}>
             Contact
           </Link>
         </li>

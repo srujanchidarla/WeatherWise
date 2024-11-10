@@ -34,9 +34,7 @@ const Contact = () => {
               <p>
                 <FaMapMarkerAlt className="contact-icon" /> Maryland, USA
               </p>
-              <p>
-                <FaPhoneAlt className="contact-icon" /> +120 188 447 24
-              </p>
+
               <p>
                 <FaEnvelope className="contact-icon" />{" "}
                 contact@srujanchidarla.com

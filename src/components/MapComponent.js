@@ -118,6 +118,7 @@ const MapComponent = () => {
 
   return (
     <div className="map-container">
+      <h1 className="heading">Global Weather Data</h1>
       <div id="map" className="map"></div>
     </div>
   );

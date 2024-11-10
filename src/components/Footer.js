@@ -13,7 +13,7 @@ import qrCode from "../assets/qr-code.png";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className="footer bg-primary text-white py-5">
+    <footer className="footer text-white">
       <div className="container">
         <div className="row">
           {/* About Me Section */}
@@ -83,15 +83,6 @@ const Footer = () => {
                 </a>
               </li>
             </ul>
-          </div>
-        </div>
-        <div className="row mt-4">
-          <div className="col text-center">
-            <img
-              src={qrCode}
-              alt="QR code to my other website"
-              className="footer-qr-code"
-            />
           </div>
         </div>
       </div>

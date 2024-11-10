@@ -1,70 +1,105 @@
+/* Footer Wrapper Styles */
 .footer {
-  background-color: #007bff;
-  color: white;
-  padding: 40px 0;
+  margin: 0;
+  color: rgb(0, 0, 0);
 }
-
-.footer .container {
-  max-width: 1200px;
+.row {
+  padding-left: 4rem;
+}
+.container {
   width: 100%;
   margin: auto;
+  padding-left: 5rem;
+  align-items: center;
+  justify-content: center;
+  color: rgb(0, 0, 0);
 }
 
-.footer-heading {
+/* Heading and Text Styles */
+.footer .footer-heading {
   font-size: 1.5em;
   margin-bottom: 15px;
 }
 
-.footer-text {
+.footer .footer-text {
   font-size: 1em;
 }
 
-.footer-links,
-.footer-info,
-.footer-social {
+/* Link and Icon Styles */
+.footer .footer-links,
+.footer .footer-info,
+.footer .footer-social {
   list-style: none;
   padding: 0;
 }
 
-.footer-links li,
-.footer-info li,
-.footer-social li {
+.footer .footer-links li,
+.footer .footer-info li,
+.footer .footer-social li {
   margin-bottom: 10px;
 }
 
-.footer-link {
-  color: white;
+.footer .footer-link {
+  /* background-color: #007bff; */
+
+  color: rgb(0, 0, 0);
   text-decoration: none;
   display: flex;
   align-items: center;
+  /* justify-content: center; */
 }
 
-.footer-link:hover {
+.footer .footer-link:hover {
   text-decoration: underline;
 }
 
-.footer-icon {
+.footer .footer-icon {
   margin-right: 10px;
 }
 
-.footer-qr-code {
+/* QR Code and Bottom Section Styles */
+.footer .footer-qr-code {
   width: 100px;
   margin: 20px 0;
 }
 
-.footer-bottom {
+.footer .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.3);
   padding-top: 10px;
+  color: rgb(0, 0, 0);
+  font-size: 0.9rem;
 }
 
+/* Responsive Footer Styles */
 @media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+    align-items: center;
+  }
+  .row {
+    padding: 0%;
+  }
   .footer .row {
     flex-direction: column;
+    align-items: center;
     text-align: center;
   }
+  .footer .footer-link {
+    /* background-color: #007bff; */
+
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .footer .col {
     margin-bottom: 20px;
   }
+
   .footer .footer-qr-code {
     margin: 10px auto;
   }

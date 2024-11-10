@@ -96,3 +96,50 @@
     font-size: 30px;
   }
 }
+
+/* Icon Animations */
+
+/* Rotate sun icon slowly */
+.sun {
+  animation: rotate-sun 8s linear infinite;
+}
+
+@keyframes rotate-sun {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Blink cloud icon slowly */
+.cloud {
+  animation: blink-cloud 3s ease-in-out infinite;
+}
+
+@keyframes blink-cloud {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Bounce rain icon up and down */
+.rain,
+.light-rain {
+  animation: bounce-rain 1.5s ease-in-out infinite;
+}
+
+@keyframes bounce-rain {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}

@@ -11,7 +11,7 @@
   color: #000000;
   animation: fadeIn 1s ease-in-out;
   text-align: center;
-  font-family: "Roboto", sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 .mainInfo h2 {
@@ -26,6 +26,7 @@
   align-items: center;
   justify-content: center;
   margin: 20px 0;
+  margin-right: 30px;
 }
 
 .temperatureValue {
@@ -47,9 +48,13 @@
   font-size: 1.5rem;
 }
 
+.sunrise_data {
+  color: rgb(255, 153, 0);
+}
+
 .weatherDetailsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 10px;
   margin-top: 20px;
 }
@@ -69,16 +74,89 @@
   color: #000000;
 }
 
-.pressure {
-  grid-column: span 2;
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .weatherContainer {
+    padding: 15px;
+    /* align-items: center;
+    justify-content: center; */
+  }
+
+  .temperatureValue {
+    font-size: 2.5rem;
+  }
+
+  .sunInfo {
+    flex-direction: column;
+    font-size: 1.2rem;
+  }
+
+  .weatherDetailsGrid {
+    grid-template-columns: 1fr;
+    align-items: center;
+    text-align: center;
+    align-self: center;
+  }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    background-color: rgba(255, 215, 0, 0.3);
   }
-  to {
+  50% {
+    transform: scale(1.1);
+    background-color: rgba(255, 215, 0, 0.5);
+  }
+}
+
+/* Icon animations for other details */
+.detailItem svg {
+  margin-bottom: 5px;
+  color: #000000;
+}
+
+.temperatureSection svg {
+  animation: rotateThermometer 5s linear infinite;
+}
+
+@keyframes rotateThermometer {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animation for other weather condition icons */
+.weatherIcon .icon-bounce {
+  animation: bounceIcon 1.5s ease-in-out infinite;
+}
+
+@keyframes bounceIcon {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Fading effect for cloud icons */
+.weatherIcon .icon-fade {
+  animation: fadeCloud 2s ease-in-out infinite;
+}
+
+@keyframes fadeCloud {
+  0%,
+  100% {
     opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
   }
 }
 
@@ -99,5 +177,7 @@
 
   .weatherDetailsGrid {
     grid-template-columns: 1fr;
+    align-items: center;
+    text-align: center;
   }
 }

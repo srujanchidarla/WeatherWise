@@ -5,6 +5,7 @@ import {
   WiRain,
   WiSnow,
   WiThunderstorm,
+  WiShowers,
 } from "react-icons/wi";
 import "./HourForecast.css";
 
@@ -16,6 +17,7 @@ const weatherIcons = {
   "broken clouds": <WiCloud />,
   "shower rain": <WiRain />,
   rain: <WiRain />,
+  "light rain": <WiShowers />, // Using a different icon for light rain
   thunderstorm: <WiThunderstorm />,
   snow: <WiSnow />,
   mist: <WiCloud />,
@@ -47,11 +49,23 @@ const HourForecast = ({ forecastData }) => {
             hour: "2-digit",
             minute: "2-digit",
           });
+
+          // Add specific class for animation based on condition
+          const iconClass = hour.condition.includes("clear sky")
+            ? "sun"
+            : hour.condition.includes("cloud")
+            ? "cloud"
+            : hour.condition.includes("light rain")
+            ? "light-rain"
+            : hour.condition.includes("rain")
+            ? "rain"
+            : "";
+
           return (
             <div key={index} className="forecast-item">
               <p className="day">{dayLabel}</p>
               <p className="time">{timeLabel}</p>
-              <div className="icon">
+              <div className={`icon ${iconClass}`}>
                 {weatherIcons[hour.condition] || <WiDaySunny />}
               </div>
               <p className="temp">{hour.temperature}°C</p>

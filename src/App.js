@@ -121,7 +121,7 @@ function App() {
                     <>
                       <div className="d-flex justify-content-center align-items-center my-4">
                         {isCurrentLocation && (
-                          <button className="btn btn-success px-4">
+                          <button className="btn btn-success px-4 m-1">
                             This is your current location weather report:{" "}
                             {currentCity}, {currentCountry}
                           </button>

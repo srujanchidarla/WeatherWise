@@ -29,7 +29,7 @@ function WeatherComponent({
     if (!timestamp) return "N/A";
     const date = new Date(
       (timestamp + timezoneOffset) * 1000 + 5 * 60 * 60 * 1000
-    ); // Adding 2 hours in milliseconds
+    );
     return date.toLocaleTimeString([], {
       hour: "2-digit",
       minute: "2-digit",
@@ -40,15 +40,15 @@ function WeatherComponent({
   const getWeatherIcon = (main) => {
     switch (main.toLowerCase()) {
       case "clear":
-        return <WiDaySunny size={50} />;
+        return <WiDaySunny size={70} className="icon-bounce" />;
       case "clouds":
-        return <WiCloud size={50} />;
+        return <WiCloud size={70} className="icon-fade" />;
       case "rain":
-        return <WiDayRain size={50} />;
+        return <WiDayRain size={70} className="icon-bounce" />;
       case "snow":
-        return <WiSnow size={50} />;
+        return <WiSnow size={70} />;
       default:
-        return <WiDaySunny size={50} />;
+        return <WiDaySunny size={70} />;
     }
   };
 
@@ -79,7 +79,7 @@ function WeatherComponent({
           <WiThermometer size={100} />
           <div>
             <p className="temperatureValue">{weather.main.temp}°C</p>
-            <p>Feels Like: {weather.main.feels_like}°C</p>
+            <h4>Feels Like: {weather.main.feels_like}°C</h4>
           </div>
         </div>
         <div className="weatherIcon animate__animated animate__zoomIn">
@@ -91,11 +91,11 @@ function WeatherComponent({
       </div>
       <div className="sunInfo animate__animated animate__fadeIn">
         <div className="sunrise">
-          <WiSunrise size={30} />
+          <WiSunrise className="sunrise_data" size={60} />
           <p>Sunrise: {sunriseTime}</p>
         </div>
         <div className="sunset">
-          <WiSunset size={30} />
+          <WiSunset className="sunrise_data" size={60} />
           <p>Sunset: {sunsetTime}</p>
         </div>
       </div>
@@ -118,11 +118,11 @@ function WeatherComponent({
           <WiDust size={30} />
           <p>Visibility: {weather.visibility / 1000} km</p>
         </div>
-        <div className="detailItem pressure">
+        <div className="detailItem">
           <WiBarometer size={30} />
           <p>Pressure: {weather.main.pressure} hPa</p>
         </div>
-        <div className="detailItem">
+        <div className="detailItem population">
           <WiEarthquake size={30} />
           <p>Population: {formatPopulation(population)}</p>
         </div>

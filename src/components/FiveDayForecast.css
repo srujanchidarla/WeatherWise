@@ -1,35 +1,99 @@
 .five-day-forecast {
+  background-color: #555;
+  margin: 1rem;
+  border-radius: 1rem;
+  height: fit-content;
   text-align: center;
-  margin-top: 20px;
-  padding: 10px;
+  padding: 2rem;
 }
 
 .forecast-grid {
   display: grid;
+  gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 15px;
+  justify-items: center;
 }
 
 .forecast-day {
-  background: #f4f4f4;
-  padding: 15px;
+  background: #f9f9f9;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 100%;
+  max-width: 180px;
   text-align: center;
-  transition: transform 0.2s ease;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  animation: fadeInUp 0.5s forwards ease-in-out;
+  animation-delay: calc(0.1s * var(--index));
 }
 
 .forecast-day:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.icon {
+  font-size: 40px;
+  color: #ffb347;
+  margin-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+.forecast-day:hover .icon {
+  color: #ffa726;
+}
+
+.forecast-day h4 {
+  font-size: 1.1em;
+  color: #333;
+}
+
+.forecast-day p {
+  margin: 5px 0;
+  color: #555;
+  font-size: 0.95em;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  .forecast-day h4 {
+    font-size: 1em;
+  }
+
+  .forecast-day p {
+    font-size: 0.9em;
+  }
+
+  .icon {
+    font-size: 35px;
+  }
+}
+
+/* Animations */
+@keyframes rotate-sun {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fade-icon {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.sun {
+  animation: rotate-sun 10s linear infinite;
 }
 
 .weather-icon {
-  width: 50px;
-  height: 50px;
-}
-
-@media (max-width: 600px) {
-  .forecast-grid {
-    grid-template-columns: 1fr;
-  }
+  animation: fade-icon 3s ease-in-out infinite;
 }
