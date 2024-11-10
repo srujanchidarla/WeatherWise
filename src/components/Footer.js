@@ -8,7 +8,6 @@ import {
   FaUser,
 } from "react-icons/fa";
 import "./Footer.css";
-import qrCode from "../assets/qr-code.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();

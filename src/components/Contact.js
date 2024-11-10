@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
+import { FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import "./Contact.css";
 import qrCode from "../assets/qr-code.png";
 
