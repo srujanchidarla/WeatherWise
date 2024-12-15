@@ -18,7 +18,12 @@ function App() {
   const [currentCity, setCurrentCity] = useState("");
   const [currentCountry, setCurrentCountry] = useState("");
   const [population, setPopulation] = useState(null);
+  const [units, setUnits] = useState("metric"); // Toggle between metric and imperial
   const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+
+  const toggleUnits = () => {
+    setUnits((prevUnits) => (prevUnits === "metric" ? "imperial" : "metric"));
+  };
 
   // Memoized fetchWeatherByCoords function
   const fetchWeatherByCoords = useCallback(
@@ -26,7 +31,7 @@ function App() {
       setLoading(true);
       setError(null);
       try {
-        const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+        const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
         const response = await axios.get(weatherUrl);
         if (response.status === 200) {
           const data = response.data;
@@ -45,8 +50,8 @@ function App() {
         setLoading(false);
       }
     },
-    [apiKey]
-  ); // Only re-define when apiKey changes
+    [apiKey, units]
+  ); // Include `units` in dependencies
 
   // Updated useEffect with memoized fetchWeatherByCoords
   useEffect(() => {
@@ -96,7 +101,7 @@ function App() {
 
   const hourlyForecastData = weatherData
     ? weatherData.list.map((item) => ({
-        time: item.dt * 1000, // Storing as timestamp
+        time: item.dt * 1000 * 2, // Storing as timestamp
         temperature: item.main.temp,
         condition: item.weather[0].description.toLowerCase(), // Ensure lowercase for consistent matching
       }))
@@ -137,6 +142,8 @@ function App() {
                             sunset={weatherData.city.sunset}
                             timezone={weatherData.city.timezone}
                             population={population}
+                            units={units} // Pass units
+                            toggleUnits={toggleUnits} // Pass toggleUnits
                           />
                           <HourForecast
                             forecastData={hourlyForecastData}
@@ -154,35 +161,8 @@ function App() {
                 </>
               }
             />
-            <Route
-              path="/forecast"
-              element={
-                <>
-                  <h1 className="m-3 heading">Forecast for {currentCity}</h1>
-                  <HourForecast forecastData={hourlyForecastData} />
-                  <FiveDayForecast
-                    forecastList={weatherData?.list || []}
-                    cityName={currentCity}
-                  />
-                </>
-              }
-            />
-            <Route
-              path="/map"
-              element={
-                <>
-                  <MapComponent />
-                </>
-              }
-            />
-            <Route
-              path="/contact"
-              element={
-                <>
-                  <Contact />
-                </>
-              }
-            />
+            <Route path="/map" element={<MapComponent />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
         </div>
       </Router>

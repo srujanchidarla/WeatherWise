@@ -12,6 +12,11 @@ import {
   WiBarometer,
   WiDust,
   WiEarthquake,
+  WiShowers,
+  WiSleet,
+  WiHail,
+  WiFog,
+  WiDaySleetStorm,
 } from "react-icons/wi";
 import "animate.css";
 import "./WeatherCard.css";
@@ -24,6 +29,8 @@ function WeatherComponent({
   sunset,
   timezone,
   population,
+  units,
+  toggleUnits,
 }) {
   const convertToLocalTime = (timestamp, timezoneOffset) => {
     if (!timestamp) return "N/A";
@@ -45,8 +52,18 @@ function WeatherComponent({
         return <WiCloud size={70} className="icon-fade" />;
       case "rain":
         return <WiDayRain size={70} className="icon-bounce" />;
+      case "showers":
+        return <WiShowers size={70} />;
       case "snow":
         return <WiSnow size={70} />;
+      case "sleet":
+        return <WiSleet size={70} />;
+      case "hail":
+        return <WiHail size={70} />;
+      case "fog":
+        return <WiFog size={70} />;
+      case "wintry mix":
+        return <WiDaySleetStorm size={70} />;
       default:
         return <WiDaySunny size={70} />;
     }
@@ -67,6 +84,7 @@ function WeatherComponent({
 
   const sunriseTime = convertToLocalTime(sunrise, timezone);
   const sunsetTime = convertToLocalTime(sunset, timezone);
+  const temperatureUnit = units === "imperial" ? "°F" : "°C";
 
   return (
     <div className="weatherContainer animate__animated animate__fadeIn">
@@ -78,8 +96,16 @@ function WeatherComponent({
         <div className="temperatureSection animate__animated animate__fadeInUp">
           <WiThermometer size={100} />
           <div>
-            <p className="temperatureValue">{weather.main.temp}°C</p>
-            <h4>Feels Like: {weather.main.feels_like}°C</h4>
+            <p className="temperatureValue">
+              {weather.main.temp} {temperatureUnit}
+            </p>
+            <p className="feels-like">
+              Feels Like: {weather.main.feels_like} {temperatureUnit}
+            </p>
+            {/* Scale Toggle Button */}
+            <button className="btn btn-primary my-2" onClick={toggleUnits}>
+              Switch to {units === "metric" ? "Fahrenheit" : "Celsius"}
+            </button>
           </div>
         </div>
         <div className="weatherIcon animate__animated animate__zoomIn">
@@ -107,7 +133,8 @@ function WeatherComponent({
         <div className="detailItem">
           <WiStrongWind size={30} />
           <p>
-            Wind Speed: {weather.wind.speed} km/h, {weather.wind.deg}°
+            Wind Speed: {weather.wind.speed}{" "}
+            {units === "metric" ? "km/h" : "mph"}, {weather.wind.deg}°
           </p>
         </div>
         <div className="detailItem">
