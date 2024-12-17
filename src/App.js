@@ -101,7 +101,7 @@ function App() {
 
   const hourlyForecastData = weatherData
     ? weatherData.list.map((item) => ({
-        time: item.dt * 1000 * 2, // Storing as timestamp
+        time: item.dt * 1000, // Storing as timestamp
         temperature: item.main.temp,
         condition: item.weather[0].description.toLowerCase(), // Ensure lowercase for consistent matching
       }))
@@ -158,6 +158,19 @@ function App() {
                       )}
                     </>
                   )}
+                </>
+              }
+            />
+            <Route
+              path="/forecast"
+              element={
+                <>
+                  <h1 className="m-3 heading">Forecast for {currentCity}</h1>
+                  <HourForecast forecastData={hourlyForecastData} />
+                  <FiveDayForecast
+                    forecastList={weatherData?.list || []}
+                    cityName={currentCity}
+                  />
                 </>
               }
             />

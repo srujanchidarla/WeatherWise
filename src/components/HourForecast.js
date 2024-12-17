@@ -22,20 +22,6 @@ const weatherIcons = {
   mist: <WiCloud />,
 };
 
-const getDayLabel = (date) => {
-  const today = new Date();
-  const tomorrow = new Date(today);
-  tomorrow.setDate(today.getDate() + 1);
-
-  if (date.toDateString() === today.toDateString()) {
-    return "Today";
-  } else if (date.toDateString() === tomorrow.toDateString()) {
-    return "Tomorrow";
-  } else {
-    return date.toLocaleDateString([], { weekday: "long" });
-  }
-};
-
 const HourForecast = ({ forecastData }) => {
   return (
     <div className="hour-forecast">
@@ -43,30 +29,20 @@ const HourForecast = ({ forecastData }) => {
       <div className="forecast-grid">
         {forecastData.map((hour, index) => {
           const date = new Date(hour.time);
-          const dayLabel = getDayLabel(date);
+          const dayLabel = date.toLocaleDateString([], { weekday: "long" });
           const timeLabel = date.toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",
           });
 
-          const iconClass = hour.condition.includes("clear sky")
-            ? "sun"
-            : hour.condition.includes("cloud")
-            ? "cloud"
-            : hour.condition.includes("light rain")
-            ? "light-rain"
-            : hour.condition.includes("rain")
-            ? "rain"
-            : "";
-
           return (
             <div key={index} className="forecast-item">
               <p className="day">{dayLabel}</p>
               <p className="time">{timeLabel}</p>
-              <div className={`icon ${iconClass}`}>
+              <div className="icon">
                 {weatherIcons[hour.condition] || <WiDaySunny />}
               </div>
-              <p className="temp">{hour.temperature}°C</p>
+              <p className="temp">{hour.temperature.toFixed(1)}°C</p>
               <p className="condition">{hour.condition}</p>
             </div>
           );
